@@ -8,11 +8,32 @@ generator client {
   binaryTargets = env("BINARY_TARGET")
 }
 
-// Define your own datamodels here and run `yarn redwood db save` to create
-// migrations for them.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String   @unique
+  name      String?
+  bands     Band[]
+}
+
+model Band {
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  active     Boolean    @default(true)
+  bandName   String
+  author     User?      @relation(fields:  [authorId], references: [id])
+  authorId   Int?
+}
+
+model Stream {
+  id         Int        @id @default(autoincrement())
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  title      String
+  body       String
+  when       DateTime @default(now())
+  link       String
+  author     User?      @relation(fields:  [authorId], references: [id])
+  authorId   Int?
 }
