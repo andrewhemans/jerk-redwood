@@ -1,6 +1,6 @@
 datasource DS {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -19,6 +19,7 @@ model User {
 model Band {
   id         Int        @id @default(autoincrement())
   createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   active     Boolean    @default(true)
   bandName   String
   homeTown   String
@@ -34,9 +35,10 @@ model Band {
 model Stream {
   id         Int        @id @default(autoincrement())
   createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
   title      String
   body       String
-  when       DateTime   @default(now())
+  when       DateTime @default(now())
   link       String
   author     User?      @relation(fields:  [authorId], references: [id])
   authorId   Int?

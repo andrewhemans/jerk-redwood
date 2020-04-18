@@ -1,6 +1,6 @@
 datasource DS {
   provider = "sqlite"
-  url      = env("DATABASE_URL")
+  url = "***"
 }
 
 generator client {
@@ -36,7 +36,7 @@ model Stream {
   createdAt  DateTime   @default(now())
   title      String
   body       String
-  when       DateTime   @default(now())
+  when       DateTime @default(now())
   link       String
   author     User?      @relation(fields:  [authorId], references: [id])
   authorId   Int?
